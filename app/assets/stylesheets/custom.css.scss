@@ -33,6 +33,13 @@
   font-weight: bold;
 }
 
+.nav_item {
+  margin-left: 25px;
+  float: left;
+  margin-top: 20px;
+}
+
+
 .btn-xlarge {
   background-color: #144539;
 }
@@ -48,4 +55,15 @@
 
 .colormatch a {
   color: #144539;
+}
+
+.listing {
+  list-style: none;
+  padding-left: 0;
+}
+
+.chef-title {
+  color: #144539;
+  font-weight: bold;
+  font-size: 1,25em;
 }
