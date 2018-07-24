@@ -11,7 +11,7 @@ class RecipeEditTest < ActionDispatch::IntegrationTest
   test "reject invalid recipe update" do
     get edit_recipe_path(@recipe)
     assert_template 'recipes/edit'
-    patch recipe_path(@recipe), params: { recipe: {name: " ", description: " dino" } }
+    patch recipes_path(@recipe), params: { recipe: {name: " ", description: " dino" } }
     assert_template 'recipes/edit'
     assert_select 'h2.panel-title'
     assert_select 'div.panel-body'

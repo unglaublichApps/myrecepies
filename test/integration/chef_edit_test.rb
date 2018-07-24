@@ -20,7 +20,7 @@ class ChefEditTest < ActionDispatch::IntegrationTest
     get edit_chef_path(@chef)
     assert_template 'chefs/edit'
     patch chef_path(@chef), params: {chef: { chefname: "peter1", email: "peter1@gmail.com"} }
-    assert_redirect_to @chef
+    assert_redirected_to @chef
     assert_not flash.empty?
     @chef.reload
     assert_match "peter1", @chef.chefname
