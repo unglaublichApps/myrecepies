@@ -44,20 +44,21 @@ class RecipesController < ApplicationController
     redirect_to recipes_path
   end
 
-  def set_recipe
-    @recipe = Recipe.find(params[:id])
-  end
-
   private
+
+    def set_recipe
+      @recipe = Recipe.find(params[:id])
+    end
 
     def recipe_params
       params.require(:recipe).permit(:name, :description)
     end
 
     def require_same_user
-      if current_chef != @recipe.chef
+      if (current_chef != @recipe.chef and !current_chef.admin?)
         flash[:danger] = "You can only update and delete your own recepies"
         redirect_to recipes_path
       end
+    end
 
 end
