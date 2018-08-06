@@ -1,16 +1,33 @@
 class IngredientsController < ApplicationController
 
   before_action :set_ingredient, only: [:edit,:update, :show]
+  before_action :required_admin, except: [:show, :index]
 
   def new
-
+    @ingredient = Ingredient.new
   end
 
   def create
-
+    @ingredient = Ingredient.new(ingredient_params)
+    if @ingredient.save
+      flash[:success] = "Ingredient was succesfully created"
+      redirect_to ingredient_path(@ingredient)
+    else
+      render 'new'
+    end
   end
 
   def update
+    if @ingredient.update(ingredient_params)
+      flash[:success] = "Ingredient was succesfully updated"
+      redirect_to @ingredient
+    else
+      render 'edit'
+    end
+
+  def Edit
+
+  end
 
   end
 
@@ -24,8 +41,19 @@ class IngredientsController < ApplicationController
 
   private
 
+    def ingredient_params
+      params.required(:ingredient).permit(:name)
+    end
+
     def set_ingredient
       @ingredient = Ingredient.find(params[:id])
+    end
+
+    def required_admin
+      if !logged_in? || (logged_in? and !current_chef.admin?)
+        flash[:danger] = "Only admin users can perform that action"
+        redirect_to ingredient_path
+      end
     end
 
 end

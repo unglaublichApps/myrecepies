@@ -15,7 +15,7 @@
           </li>
           <% if logged_in? && current_chef.admin? %>
             <li>
-              <%= link_to "Edit this ingredient", ingredient_path(ingredient) %>
+              <%= link_to "Edit this ingredient", edit_ingredient_path(ingredient) %>
             </li>
           <% end %>
         </li>
